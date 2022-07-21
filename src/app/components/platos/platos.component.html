@@ -1,0 +1,12 @@
+<div class="carta">
+    <section class="menu" *ngFor="let menu of menus;let i = index">
+        <h3>Menu {{i + 1}}</h3>
+        <div class="lista-platos-menu">
+           <app-plato *ngFor="let plato of menus[i].platos;let ind = index" [plato]="plato.plato" [i_menu] = "i" [ind_platos] = "ind" [agregar_eliminar]="text" (enviar_plato)="eliminarPlato($event)"></app-plato> 
+        </div>
+        
+        <h4 *ngIf="menus[i].platos.length > 0">Precio total : {{menus[i].precio_total | number}}</h4>
+        <h4 *ngIf="menus[i].platos.length > 0">Tiempo promedio de espera : {{menus[i].tiempo_promedio / menus[i].platos.length}}</h4>
+        <h4 *ngIf="menus[i].platos.length > 0">Healt Score promedio: {{menus[i].healt_score / menus[i].platos.length}}</h4>
+    </section>
+</div>

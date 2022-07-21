@@ -1,0 +1,40 @@
+<div class="content-login">
+
+    <mat-card>
+        <!-- cabecera de la tarjeta -->
+
+        <mat-card-header>
+            <mat-card-title>Login</mat-card-title>
+            <mat-card-subtitle>Accede a tu cuenta</mat-card-subtitle>
+        </mat-card-header>
+
+        <!-- contenido de la tarjeta -->
+        <mat-card-content>
+            <!-- formulario de Login -->
+            <form [formGroup]="loginForm" (submit)="submitLogin()">
+                <mat-form-field>
+                    <input matInput placeholder="email" formControlName="email">
+                    <mat-error *ngIf="email?.errors?.['required']">
+                        El campo es obligatorio.
+                    </mat-error>
+                    <mat-error *ngIf="email?.errors?.['email']">
+                        Ingrese un email valido.
+                    </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field>
+                    <input type="password" matInput placeholder="password" formControlName="password">
+                    <mat-error *ngIf="password?.errors?.['required']">
+                        El campo es obligatorio.
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- boton para submit -->
+
+                <button type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Ingresar</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+
+</div>

@@ -1,0 +1,16 @@
+<div class="container">
+    <app-header></app-header>
+    <section class="content">
+        <article class="welcome" *ngIf="!menus && !continuar">
+            <h3>¡Bienvenidos!</h3>
+            <p>Para empezar a crear la carta de menus,presione "Continuar"</p>
+            <button mat-raised-button (click)="continuar = !continuar">Continuar</button>
+        </article>
+        <app-buscador *ngIf="continuar"></app-buscador>
+        <app-platos *ngIf="continuar" ></app-platos>
+    </section>
+    
+    <footer>
+        Challenge Alkemy-Angular &copy;Maximiliano Guaymas
+    </footer>
+</div>

@@ -1,0 +1,37 @@
+.example-card {
+  width: 85%;
+  min-height: 350px;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  margin-left: 1vh;
+  background-color: rgba(57, 57, 57, 0.9)
+}
+
+@media (max-width: 1250px){
+  .example-card {
+    width: 80%;
+    
+  }
+}
+
+@media (max-width: 1000px){
+  .example-card {
+    width: 70%;
+    
+  }
+}
+
+@media (max-width: 900px){
+  .example-card {
+    margin-left: 3vh;
+    
+  }
+}
+
+@media (max-width: 500px){
+  .example-card {
+    margin: 0px auto;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+  }
+}

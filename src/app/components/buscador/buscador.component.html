@@ -1,0 +1,33 @@
+<mat-card class="buscador">
+    <mat-card-title class="title-buscador">
+        <h3>Buscar plato: </h3>
+    </mat-card-title>
+
+    <mat-card-content class="content-buscador">
+        <mat-form-field appearance="fill" class="types">
+            <mat-label>Tipo</mat-label>
+            <mat-select [(ngModel)]="selectedType" name="food">
+              <mat-option *ngFor="let type of types" [value]="type.value">
+                {{type.viewValue}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field  appearance="fill">
+            <mat-label>Escribir plato</mat-label>
+            <input matInput type="text" [(ngModel)]="plato">
+            <button *ngIf="plato" matSuffix mat-icon-button aria-label="Clear" (click)="plato=''">
+              <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button class="search-btn" (click)="onSubmit()">Buscar</button>
+    </mat-card-content>
+</mat-card>
+
+<div *ngIf="sin_resultados" class="sin-resultados">
+  <h2 >No se encontraron resultados.</h2>
+</div>
+<div class="results-platos" *ngIf="results_platos">
+  <app-plato *ngFor="let plato of platos" [plato]="plato" [agregar_eliminar]="text" (enviar_plato)="agregarPlato($event)" ></app-plato>
+</div>
