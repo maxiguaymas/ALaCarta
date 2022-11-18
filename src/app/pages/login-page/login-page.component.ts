@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login-page',
@@ -35,12 +36,10 @@ export class LoginPageComponent implements OnInit {
   // submit del FormLogin
   submitLogin(){
     if(this.loginForm.valid){
-      console.table(this.loginForm.value);
       let {email,password} = this.loginForm.value;
       this.loginService.login(email,password).subscribe(
         {
           next: (response) => {
-            // console.log(response);
             if(response.token){
               sessionStorage.setItem('token',response.token);
               
@@ -49,10 +48,12 @@ export class LoginPageComponent implements OnInit {
             }
           },
           error: (error) => {
-            alert("Cuenta incorrecta. Ingresa los datos nuevamente");
+            Swal.fire({
+              title:"Cuenta incorrecta. Ingresa los datos nuevamente",
+              confirmButtonText: 'Aceptar',
+            });
             this.loginForm.reset();
-          },
-          complete: () => console.log("login terminado")
+          }
         }
       )
     }

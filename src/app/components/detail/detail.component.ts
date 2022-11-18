@@ -18,14 +18,12 @@ export class DetailComponent implements OnInit {
       console.log(params);
       this._platosService.obtenerPlato(params.id).subscribe({
         next: response =>{
-          console.log(response);
           this.plato = response;
           
         },
         error: error =>{
           console.error(error);
-        },
-        complete: () => console.log("peticion completada")
+        }
       });
     });
     

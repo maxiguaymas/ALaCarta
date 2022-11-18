@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Type } from 'src/app/interfaces/type';
 import { PlatosServiceService } from 'src/app/services/platos-service.service';
 import { Menu } from 'src/app/interfaces/menu';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -53,10 +54,8 @@ export class BuscadorComponent implements OnInit {
 
   onSubmit(){
     if(this.plato.length>2 && this.selectedType){
-      console.log(this.plato,this.selectedType);
       this._platosService.obtenerPlatos(this.selectedType,this.plato).subscribe({
         next: response =>{
-          console.log(response);
           if(response.results.length >0){
             this.platos = response.results;
             this.sin_resultados = false;
@@ -70,70 +69,93 @@ export class BuscadorComponent implements OnInit {
         error: error =>{
           console.error(error);
         },
-        complete: () => console.log("peticion completada")
       });
       this.selectedType= "";
       this.plato = "";
       this.results_platos = true;
     }
     else{
-      alert("debes completar todos los campos.");
+      Swal.fire({
+        title:"debes completar todos los campos.",
+        confirmButtonText: 'Aceptar',
+      });
     }
 
   }
-  Num_menu(): number{
-    let num = prompt('ingresa a que menu quieres agregar este plato: ');
-    
-    if(parseInt(num!) >0 && parseInt(num!) < 5) {
-      return parseInt(num!)-1;
-    }
-    else{
-      alert("Solo existe Menu 1,2,3 y 4, ingrese correctamente el numero.");
-      return this.Num_menu();
-    }
+
+  async Num_menu(): Promise<number>{
+    let num2: number = 0;
+      await Swal.fire({
+        title: 'Ingresa a que menu quieres agregar este plato: ',
+        confirmButtonText: 'Seleccionar',
+        input: 'select',
+        inputPlaceholder: 'Menu',
+        inputValue: '',
+        inputOptions: {
+          1: 'Menu 1',
+          2: 'Menu 2',
+          3: 'Menu 3',
+          4: 'Menu 4',
+        },
+        preConfirm: (value: number) => {
+          num2 = value;
+        }
+      });
+
+    return num2-1;
     
   }
 
 
-  agregarPlato(event: any){
+  async agregarPlato(event: any){
     var menus:Menu[] = this._platosService.getDataStorage();
-    let i = this.Num_menu();
-    console.log(event);
     
-    if(menus[i].platos.length < 4){
+    await this.Num_menu().then((value: number) => {
+      let i = value;
+    
+      if(menus[i].platos.length < 4){
 
-      if(event.vegan){
-        if(menus[i].veganos < 2){
-          menus[i].platos.push(event);
-          menus[i].veganos++;
-          menus[i].precio_total += event.precio;
-          menus[i].healt_score += event.healt_score;
-          menus[i].tiempo_promedio += event.tiempo;
-          this._platosService.saveDataStorage(menus);
+        if(event.vegan){
+          if(menus[i].veganos < 2){
+            menus[i].platos.push(event);
+            menus[i].veganos++;
+            menus[i].precio_total += event.precio;
+            menus[i].healt_score += event.healt_score;
+            menus[i].tiempo_promedio += event.tiempo;
+            this._platosService.saveDataStorage(menus);
+          }
+          else Swal.fire({
+            title: "El menu ya tiene 2 platos veganos.",
+            confirmButtonText: 'Aceptar',
+          });
         }
-        else alert("El menu ya tiene 2 platos veganos.");
         
-      }
-      
-      if(!event.vegan){
-        if(menus[i].no_veganos < 2){
-          menus[i].platos.push(event);
-          menus[i].no_veganos++;
-          menus[i].precio_total += event.precio;
-          menus[i].healt_score += event.healt_score;
-          menus[i].tiempo_promedio += event.tiempo;
-          this._platosService.saveDataStorage(menus);
+        if(!event.vegan){
+          if(menus[i].no_veganos < 2){
+            menus[i].platos.push(event);
+            menus[i].no_veganos++;
+            menus[i].precio_total += event.precio;
+            menus[i].healt_score += event.healt_score;
+            menus[i].tiempo_promedio += event.tiempo;
+            this._platosService.saveDataStorage(menus);
+          }
+          else Swal.fire({
+            title: "El menu ya tiene 2 platos no-veganos.",
+            confirmButtonText: 'Aceptar',
+          });
+          
         }
-        else alert("El menu ya tiene 2 platos no-veganos.");
-        
-      }
 
-    }
-    else{
-      alert("el menu ya tiene 4 platos.");
-    }
-    console.log(menus);
-    this._platosService.actualizarMenu.emit(menus);
+      }
+      else{
+        Swal.fire({
+          title:"el menu ya tiene 4 platos.",
+          confirmButtonText: 'Aceptar',
+        });
+      }
+      this._platosService.actualizarMenu.emit(menus);
+    });
+    
   }
 
 }

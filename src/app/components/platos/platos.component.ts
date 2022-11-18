@@ -16,7 +16,6 @@ export class PlatosComponent implements OnInit {
   ngOnInit(): void {
     this.menus = this._platosService.getDataStorage();
     this._platosService.actualizarMenu.subscribe(menus => {
-      console.log(menus);
       this.menus = menus;
     })
     
@@ -24,8 +23,7 @@ export class PlatosComponent implements OnInit {
   }
 
   eliminarPlato(event:any){
-    console.log(event);
-    this.menus[event.i].platos.splice(event.ind);
+    this.menus[event.i].platos.splice(event.ind,1);
     this.menus[event.i].healt_score -= event.healt_score;
     this.menus[event.i].precio_total -= event.precio;
     this.menus[event.i].tiempo_promedio -= event.tiempo;
