@@ -2,7 +2,7 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, lastValueFrom} from 'rxjs';
 import { Menu } from '../interfaces/menu';
-import { url } from './url';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +23,11 @@ export class PlatosServiceService {
       params = params.append('query',search);
     }
   
-    return this.http.get(url.endpoints + "complexSearch?"+url.apikey,{params: params});
+    return this.http.get(environment.endpoints + "complexSearch?"+environment.apikey,{params: params});
   }
 
    obtenerPlato(id: number): Observable<any>{
-    return this.http.get(url.endpoints +id +"/information?" + url.apikey)
+    return this.http.get(environment.endpoints +id +"/information?" + environment.apikey)
   }
 
   // metodos para obtener y mandar info al Local Storage

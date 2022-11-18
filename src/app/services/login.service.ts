@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { url } from './url';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,6 @@ export class LoginService {
       email,
       password
     };
-    return this.http.post(url.login_url, body);
+    return this.http.post(environment.login_url, body);
   }
 }

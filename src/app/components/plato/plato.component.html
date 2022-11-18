@@ -2,7 +2,7 @@
     <mat-card-header>
       <mat-card-title>{{plato.title}}</mat-card-title>
     </mat-card-header>
-    <img mat-card-image src={{plato.image}} alt="Photo of a Shiba Inu">
+    <img loading="lazy" mat-card-image src={{plato.image}} alt="Photo of a Shiba Inu">
     <mat-card-actions>
       <button mat-button (click)="agregar()" *ngIf="agregar_eliminar === 'agregar'">Agregar al menu</button>
       <button mat-button (click)="eliminar()" *ngIf="agregar_eliminar === 'eliminar'">Eliminar del menu</button>
