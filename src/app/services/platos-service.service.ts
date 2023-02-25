@@ -55,6 +55,14 @@ export class PlatosServiceService {
 
   // comunicamos componentes hermanos (componente buscador con componente platos)
 
+  savePlatoStorage(plato : any){
+    localStorage.setItem('plato', JSON.stringify(plato));
+  }
+
+  getPlatoStorage(): any{
+    let plato: any = JSON.parse(localStorage.getItem('plato')!);
+    return plato;
+  }
   
   
 }

@@ -1,8 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { height: 100%; width: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; padding: 0;}
 
+/* ESTILOS SCROLL */
+body::-webkit-scrollbar{
+    width: 10px;
+    background-color: #444;
+}
+
+
+body::-webkit-scrollbar-thumb{
+    background-color: whitesmoke;
+    border-radius: 50px;
+}
 .container{
     min-height: 100vh;
     width: 100%;
@@ -102,49 +113,89 @@ header{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     min-height: 50vh;
+    transition: all 300ms;
 }
 .sin-resultados{
+    
     text-align: center;
-    margin-top: 4vh;
+    margin-top: 8vh;
+    margin-bottom: 4vh;
 }
 .sin-resultados h2{
     display: inline;
     font-size: 3em;
     text-align: center;
+    font-family: 'Tourney', cursive;
     font-weight: bolder;
-    font-style: normal;
     background-color: rgba(204, 204, 204,0.8);
     border: 5px;
+    padding: 10px;
 }
 
 .carta{
     margin: 0px auto;
     width: 85%;
-    min-height: 120vh;
-    background-color: rgba(189, 176, 176, 0.9);
+    min-height: 40vh;
+    /* background-color: rgba(189, 176, 176, 0.9); */
     margin-bottom: 4vh;
     padding-top: 1vh;
     padding-bottom: 3vh;
     overflow: hidden;
 }
-.menu{
-    
+.menu1,.menu2,.menu3,.menu4{
+    background-color: rgba(189, 176, 176, 0.9);
     width: 100%;
     min-height: 83vh;
     margin: 0px auto;
     margin-top: 2vh;
+    padding-top: 2vh;
     margin-bottom: 4vh;
     border-radius: 30px;
+    border-top: 4px solid #444;
     border-bottom: 4px solid #444;
-}
-.menu h3{
-    font-size: 3em;
     text-align: center;
+    overflow: hidden;
+    transition: all 300ms;
+}
+
+.no_menu1,.no_menu2,.no_menu3,.no_menu4{
+    background-color: rgba(189, 176, 176, 0.9);
+    width: 50%;
+    height: 7vh;
+    margin: 0px auto;
+    margin-top: 2vh;
+    padding-top: 2vh;
+    border-top: 4px solid #444;
+    border-bottom: 4px solid #444;
+    border-radius: 30px;
+    text-align: center;
+    overflow: hidden;
+    transition: all 300ms;
+}
+.menu h3, .no_menu h3{
+    font-family: 'Tourney', cursive;
+    font-weight: bolder;
+    color: black;
+    font-size: 3em;
+    display: inline-block;
+    text-align: center;
+    
+}
+
+.menu .icon, .no_menu .icon{
+    font-size: 4em;
+    width: auto;
+    height: auto;
+    margin-top: -2vh;
+    position: absolute;
+    cursor: pointer;
 }
 .menu h4{
     margin-top: 2vh;
     text-align: center;
     font-size: 1.5em;
+    font-family: 'Tourney', cursive;
+    font-weight: bolder;
 }
 
 .lista-platos-menu{
@@ -159,31 +210,38 @@ header{
 /* fin contenido */
 
 /* detalles */
+
 .detalles{
+    background-color: rgba(189, 176, 176, 0.9);
     width: 50%;
-    min-height: 75vh;
-    background-color:rgba(245, 245, 245,0.8);
+    min-height: 40vh;
     margin: 0px auto;
-    margin-top: 1vh;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    border-radius: 30px;
+    border-top: 8px solid #444;
+    border-bottom: 8px solid #444;
     text-align: center;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    overflow: hidden;
 }
+
 .detalles h3{
+    font-family: 'Tourney', cursive;
     font-size: 4em;
-    line-height: 0.9em;
-    font-weight: lighter;
-    font-style: oblique;
-    margin-top: 3vh;
+    margin-top: 5vh;
+    line-height: 6vh;
 }
 .detalles img{
+    border-radius: 15px;
     width: 65%;
     height: 40vh;
-    margin-top: 2vh;
+    margin-top: 4vh;
+    margin-bottom: 1vh;
 }
 .detalles h4{
-    font-size: 1.5em;
-    font-style: italic;
-    font-weight:normal;
+    font-size: 2em;
+    margin-top: 4vh;
+    font-family: 'Tourney', cursive;
 }
 
 /* fin detalles */
@@ -239,15 +297,7 @@ footer{
     .detalles {
         width: 70%;
     }
-    
-    /* .detalles h3 {
-        font-size: 3em;
-    }
-    .detalles img {
-        width: 72%;
-        height: 40vh;
-        margin-top: 2vh;
-    } */
+
     
 }
 
@@ -292,6 +342,10 @@ footer{
         font-size: 2em;
     }
 
+    .no_menu1,.no_menu2,.no_menu3,.no_menu4{
+        width: 70%;
+    }
+
 
 
     footer {
@@ -303,15 +357,14 @@ footer{
     }
 
     .detalles h3 {
-        font-size: 3.2em;
+        font-size: 3em;
+    }
+    .detalles h4{
+        font-size: 1.7em;
     }
     .detalles img {
         width: 75%;
     }
-
-    /* .detalles h4 {
-        font-size: 2em;
-    } */
     
 }
 
@@ -342,14 +395,21 @@ footer{
         grid-template-columns: 1fr;
         
     }
+
+    .no_menu1,.no_menu2,.no_menu3,.no_menu4{
+        width: 80%;
+    }
+
     .menu h4{
-        margin-top: 2vh;
-        text-align: center;
-        font-size: 1em;
+        font-size: 1.3em;
     }
 
     footer {
         font-size: 0.8em;
+    }
+
+    .detalles {
+        width: 85%;
     }
 
     .detalles h3 {
@@ -359,8 +419,8 @@ footer{
         width: 78%;
     }
 
-    .detalles h4 {
-        font-size: 1.1em;
+    .detalles h4{
+        font-size: 1.4em;
     }
 
     
@@ -386,10 +446,16 @@ footer{
         margin-left: 0.5em;
     }
 
+    .no_menu1,.no_menu2,.no_menu3,.no_menu4{
+        width: 90%;
+    }
+
     .menu h4{
-        margin-top: 2vh;
-        text-align: center;
-        font-size: 0.8em;
+        font-size: 1.2em;
+    }
+
+    .detalles h4{
+        font-size: 1.2em;
     }
 
     

@@ -1,7 +1,7 @@
 
 <div class="container">
     <article class="detalles">
-        <h3>{{plato.title}}</h3>
+        <h3>{{plato.title | uppercase}}</h3>
         <img src={{plato.image}} alt={{plato.title}}>
         <h4>Dieta: {{plato.diets[0]}}</h4>
         <h4>Puntaje de salud: {{plato.healthScore}}</h4>

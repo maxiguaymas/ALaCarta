@@ -63,6 +63,7 @@ export class BuscadorComponent implements OnInit {
           else{
             this.platos = [];
             this.sin_resultados = true;
+            this.results_platos = false;
           }
           
         },
@@ -156,6 +157,12 @@ export class BuscadorComponent implements OnInit {
       this._platosService.actualizarMenu.emit(menus);
     });
     
+  }
+
+  limpiarBusqueda(){
+    this.platos = [];
+    this.results_platos = false;
+    this.sin_resultados = false;
   }
 
 }

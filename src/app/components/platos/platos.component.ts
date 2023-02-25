@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Menu } from 'src/app/interfaces/menu';
 import { PlatosServiceService } from 'src/app/services/platos-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-platos',
@@ -10,7 +11,7 @@ import { PlatosServiceService } from 'src/app/services/platos-service.service';
 export class PlatosComponent implements OnInit {
   text: string = "eliminar";
   menus!: Menu[];
-  
+  expand : boolean[] = [false,false,false,false];
   constructor(private _platosService:PlatosServiceService) { }
 
   ngOnInit(): void {
@@ -35,6 +36,19 @@ export class PlatosComponent implements OnInit {
     }
     this._platosService.saveDataStorage(this.menus);
     this.ngOnInit();
+  }
+  
+  changeExpand(i : number){
+    if(this.menus[i].platos.length > 0){
+      this.expand[i] = !this.expand[i];
+    }
+    else{
+      Swal.fire({
+        title:`El Menu ${i+1} no tiene ningun plato agregado.`,
+        confirmButtonText: 'Aceptar',
+      });
+    }
+    
   }
 
 }
